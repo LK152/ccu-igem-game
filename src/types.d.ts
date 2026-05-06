@@ -10,5 +10,19 @@ type SceneProps = {
 
 type OptionSceneProps = SceneProps & {
   options: Option[];
-  onSelect: (value: string) => void;
+  onSelect: (val: string) => void;
 };
+
+interface MenuButtonProps {
+  open: boolean;
+  onClick: () => void;
+}
+
+interface NavbarProps {
+  onMenuToggle: (open: boolean) => void;
+}
+
+type NavbarItem = {
+    title: string;
+    icon: string;
+}

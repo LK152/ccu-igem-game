@@ -1,10 +1,19 @@
+import { useState } from 'react';
 import MenuButton from '../MenuButton';
 import ToggleButton from '../ToggleButton';
 
-const Navbar = () => {
+const Navbar = ({ onMenuToggle }: NavbarProps) => {
+	const [open, setOpen] = useState(false);
+
+	const handleToggle = () => {
+		const next = !open;
+		setOpen(next);
+		onMenuToggle(next);
+	};
+
 	return (
 		<nav className='fixed w-full z-50 h-fit bg-amber-100 flex flex-row justify-between px-10'>
-			<MenuButton />
+			<MenuButton open={open} onClick={handleToggle} />
 			<div className='flex flex-row'>
 				<ToggleButton
 					init={false}
