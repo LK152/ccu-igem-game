@@ -1,43 +1,47 @@
 import OptionScene from '@components/OptionScene';
 import './App.css';
-import { useState } from 'react';
 import Navbar from '@components/Navbar';
+import { useStateStore } from './store';
 
 const NavbarItems: NavbarItem[] = [
-	{ title: '回到遊戲', icon: '/left.png' },
+	{ title: '回到遊戲', icon: 'left.png' },
 	{
 		title: '收集結局',
-		icon: '/star.png',
+		icon: 'star.png',
 	},
-	{ title: '彩蛋', icon: '/easter.png' },
-	{ title: '資訊', icon: '/contract.png' },
-	{ title: '關於我們', icon: '/info.png' },
+	{ title: '彩蛋', icon: 'easter.png' },
+	{ title: '資訊', icon: 'contract.png' },
+	{ title: '關於我們', icon: 'info.png' },
 ];
 
 function App() {
-	const [menuOpen, setMenuOpen] = useState(false);
+	const { menuOpen } = useStateStore();
 
 	return (
 		<>
-			<Navbar onMenuToggle={setMenuOpen} />
+			<Navbar />
 			<div className='flex h-screen'>
 				<div
-					className={`fixed top-0 left-0 h-full z-40 bg-orange-500 flex flex-col items-baseline overflow-hidden
-                        justify-center gap-8 transition-all duration-300 ease-in-out 
+					className={`fixed top-0 left-0 h-full z-40 
+                        bg-orange-500 flex flex-col items-center overflow-hidden
+                        justify-center transition-all duration-300 ease-in-out 
                         ${menuOpen ? 'w-64' : 'w-0'}`}
 				>
-					{NavbarItems.map((item, i) => (
-						<button
-							key={i}
-							className='flex flex-row items-center text-white text-lg font-medium whitespace-nowrap hover:cursor-pointer'
-						>
-							<img
-								src={item.icon}
-								className='h-7 w-7 object-contain m-2'
-							/>
-							{item.title}
-						</button>
-					))}
+					<div className='flex flex-col gap-8 items-start'>
+						{NavbarItems.map((item, i) => (
+							<button
+								key={i}
+								className='flex flex-row items-center text-white text-lg font-medium whitespace-nowrap hover:cursor-pointer'
+							>
+								<img
+									src={`/${item.icon}`}
+									alt={item.icon}
+									className='h-7 w-7 object-contain m-2'
+								/>
+								{item.title}
+							</button>
+						))}
+					</div>
 				</div>
 
 				<div
